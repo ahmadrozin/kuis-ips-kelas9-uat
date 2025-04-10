@@ -23,8 +23,89 @@
   <div id="hasil"></div>
 
   <script>
-    // Placeholder: ini akan diganti otomatis di file asli (kode terlalu panjang untuk dimasukkan ulang di sini)
-    // Gunakan konten dari canvas sebelumnya secara manual jika perlu
+    const soalList = [
+      { soal: "Interaksi sosial tidak akan terjadi tanpa...", pilihan: ["Teknologi", "Transportasi", "Komunikasi", "Kota besar"], benar: 2 },
+      { soal: "Faktor yang bukan termasuk dalam proses sosialisasi adalah...", pilihan: ["Keluarga", "Sekolah", "Media massa", "Konflik"], benar: 3 },
+      { soal: "Sosialisasi primer terjadi di lingkungan...", pilihan: ["Sekolah", "Masyarakat", "Keluarga", "Teman sebaya"], benar: 2 },
+      { soal: "Bentuk interaksi sosial yang mengarah pada persatuan adalah...", pilihan: ["Pertikaian", "Kerja sama", "Kompetisi", "Konflik"], benar: 1 },
+      { soal: "Konflik sosial dapat disebabkan oleh...", pilihan: ["Perbedaan pendapat", "Gotong royong", "Musyawarah", "Saling menghargai"], benar: 0 },
+      { soal: "Penyelesaian konflik dengan melibatkan pihak ketiga disebut...", pilihan: ["Kompetisi", "Akomodasi", "Asimilasi", "Kerja sama"], benar: 1 },
+      { soal: "Nilai sosial yang berfungsi menjaga keteraturan sosial adalah...", pilihan: ["Nilai kebenaran", "Nilai keindahan", "Nilai moral", "Nilai instrumental"], benar: 2 },
+
+      { soal: "Globalisasi mempercepat penyebaran...", pilihan: ["Transportasi", "Informasi", "Konflik", "Kemiskinan"], benar: 1 },
+      { soal: "Salah satu dampak negatif globalisasi adalah...", pilihan: ["Kemajuan teknologi", "Informasi cepat", "Westernisasi", "Peningkatan pendidikan"], benar: 2 },
+      { soal: "Perubahan sosial cepat disebut...", pilihan: ["Evolusi", "Revolusi", "Modernisasi", "Globalisasi"], benar: 1 },
+      { soal: "Globalisasi dalam bidang budaya ditandai dengan...", pilihan: ["Peningkatan ekonomi", "Modernisasi", "Masuknya budaya asing", "Penemuan teknologi"], benar: 2 },
+      { soal: "Faktor internal perubahan sosial...", pilihan: ["Perubahan iklim", "Perang", "Penemuan baru", "Kolonialisme"], benar: 2 },
+      { soal: "Contoh perubahan sosial karena faktor eksternal adalah...", pilihan: ["Teknologi", "Budaya asing", "Norma baru", "Stratifikasi sosial"], benar: 1 },
+      { soal: "Sikap terbaik menghadapi globalisasi adalah...", pilihan: ["Menolak semua perubahan", "Mengikuti tanpa saring", "Selektif terhadap pengaruh", "Meniru budaya asing"], benar: 2 },
+      { soal: "Globalisasi ekonomi ditandai dengan...", pilihan: ["Import dan ekspor", "Modernisasi", "Tradisi", "Konflik"], benar: 0 },
+
+      { soal: "Ketimpangan sosial adalah...", pilihan: ["Perbedaan biasa", "Kesenjangan akses dan kesempatan", "Keragaman budaya", "Pemerataan pembangunan"], benar: 1 },
+      { soal: "Salah satu penyebab ketimpangan sosial adalah...", pilihan: ["Pendidikan tinggi", "Pembangunan merata", "Distribusi tidak adil", "Teknologi"], benar: 2 },
+      { soal: "Contoh dampak ketimpangan sosial...", pilihan: ["Kesejahteraan meningkat", "Akses pendidikan merata", "Kemiskinan", "Pemerataan kesehatan"], benar: 2 },
+      { soal: "Upaya pemerintah untuk mengatasi ketimpangan...", pilihan: ["Menaikkan pajak", "Membuat undang-undang", "Program subsidi dan bantuan sosial", "Pembatasan akses"], benar: 2 },
+      { soal: "Ketimpangan ekonomi terjadi ketika...", pilihan: ["Distribusi kekayaan tidak merata", "Semua penduduk kaya", "Kesejahteraan tinggi", "Harga murah"], benar: 0 },
+      { soal: "Program yang bertujuan meningkatkan kesejahteraan masyarakat miskin...", pilihan: ["Bansos", "Reklamasi", "Ekspor", "Urbanisasi"], benar: 0 },
+      { soal: "Salah satu solusi ketimpangan sosial oleh masyarakat adalah...", pilihan: ["Mengabaikan masalah", "Mendukung pembangunan berkelanjutan", "Menghindari pajak", "Menolak globalisasi"], benar: 1 },
+
+      { soal: "Contoh kegiatan ekonomi sektor primer adalah...", pilihan: ["Pertanian", "Pabrik", "Perdagangan", "Perbankan"], benar: 0 },
+      { soal: "Kegiatan ekonomi sektor sekunder...", pilihan: ["Pertanian", "Pengolahan hasil tambang", "Jasa transportasi", "Perdagangan"], benar: 1 },
+      { soal: "Kegiatan sektor tersier adalah...", pilihan: ["Perikanan", "Perdagangan", "Industri", "Peternakan"], benar: 1 },
+      { soal: "Masalah utama ketenagakerjaan di Indonesia adalah...", pilihan: ["Tingkat pengangguran", "Pendidikan tinggi", "Pendapatan tinggi", "Tenaga kerja asing"], benar: 0 },
+      { soal: "Tenaga kerja produktif berada pada usia...", pilihan: ["0–14 tahun", "15–64 tahun", "65 tahun ke atas", "Semua umur"], benar: 1 },
+      { soal: "Perdagangan internasional adalah...", pilihan: ["Perdagangan dalam negeri", "Ekspor dan impor antarnegara", "Transaksi lokal", "Pasar tradisional"], benar: 1 },
+      { soal: "Contoh ekspor Indonesia...", pilihan: ["Gadget", "Mobil", "Kelapa sawit", "Pesawat"], benar: 2 },
+      { soal: "Wirausaha adalah orang yang...", pilihan: ["Menjadi pegawai", "Bekerja di kantor", "Menciptakan usaha sendiri", "Menjadi buruh"], benar: 2 },
+
+      { soal: "Fungsi utama bank adalah...", pilihan: ["Menjual barang", "Mengelola negara", "Menghimpun dan menyalurkan dana", "Menetapkan pajak"], benar: 2 },
+      { soal: "Bank Indonesia adalah bank...", pilihan: ["Swasta", "Nasional", "Sentral", "Pembangunan"], benar: 2 },
+      { soal: "Uang berfungsi sebagai...", pilihan: ["Bahan makanan", "Alat tukar", "Barang konsumsi", "Modal tetap"], benar: 1 },
+      { soal: "Literasi keuangan bertujuan agar masyarakat...", pilihan: ["Boros", "Tidak menabung", "Bijak mengelola uang", "Berhutang banyak"], benar: 2 },
+      { soal: "Salah satu contoh investasi adalah...", pilihan: ["Jajan", "Menabung emas", "Berfoya-foya", "Konsumsi berlebih"], benar: 1 },
+      { soal: "Pajak dibayarkan kepada...", pilihan: ["Teman", "Perusahaan", "Negara", "Pasar"], benar: 2 },
+      { soal: "Pajak digunakan untuk...", pilihan: ["Beli mobil pribadi", "Bangun infrastruktur", "Naik gaji pegawai swasta", "Import barang mewah"], benar: 1 },
+
+      { soal: "Penduduk paling padat di Indonesia ada di pulau...", pilihan: ["Sumatra", "Kalimantan", "Jawa", "Sulawesi"], benar: 2 },
+      { soal: "Urbanisasi adalah...", pilihan: ["Pindah desa ke kota", "Pindah rumah", "Mudik", "Migrasi keluar negeri"], benar: 0 },
+      { soal: "Dampak negatif urbanisasi...", pilihan: ["Peningkatan pertanian", "Kepadatan kota", "Penghijauan", "Keseimbangan lingkungan"], benar: 1 },
+      { soal: "Sumber daya alam yang dapat diperbarui adalah...", pilihan: ["Minyak bumi", "Batu bara", "Hutan", "Emas"], benar: 2 },
+      { soal: "Salah satu penyebab banjir di kota besar...", pilihan: ["Hutan lebat", "Saluran lancar", "Sampah menyumbat saluran", "Jalan bersih"], benar: 2 },
+      { soal: "Pengelolaan sumber daya alam harus memperhatikan...", pilihan: ["Eksploitasi", "Keuntungan cepat", "Kelestarian lingkungan", "Penggunaan berlebihan"], benar: 2 },
+      { soal: "Polusi udara banyak disebabkan oleh...", pilihan: ["Pepohonan", "Pabrik dan kendaraan bermotor", "Taman kota", "Angin"], benar: 1 },
+
+      { soal: "Jepang menjajah Indonesia pada tahun...", pilihan: ["1942", "1945", "1908", "1928"], benar: 0 },
+      { soal: "Sumpah Pemuda terjadi pada tahun...", pilihan: ["1908", "1928", "1945", "1998"], benar: 1 },
+      { soal: "Organisasi pergerakan nasional pertama adalah...", pilihan: ["PGRI", "Budi Utomo", "Muhammadiyah", "NU"], benar: 1 },
+      { soal: "Proklamasi Kemerdekaan Indonesia dibacakan oleh...", pilihan: ["Soekarno", "Soeharto", "Hatta", "Moh. Yamin"], benar: 0 },
+      { soal: "Masa Orde Baru dipimpin oleh...", pilihan: ["Soekarno", "Habibie", "Soeharto", "Megawati"], benar: 2 },
+      { soal: "Reformasi 1998 menandai berakhirnya masa...", pilihan: ["Penjajahan Belanda", "Orde Baru", "Orde Lama", "Demokrasi Terpimpin"], benar: 1 }
+    ];
+
+    const form = document.getElementById("kuisForm");
+    soalList.forEach((item, index) => {
+      const soalDiv = document.createElement("div");
+      soalDiv.className = "soal";
+      soalDiv.innerHTML = `<h3>${index + 1}. ${item.soal}</h3>`;
+      const optionsDiv = document.createElement("div");
+      optionsDiv.className = "options";
+      item.pilihan.forEach((opt, i) => {
+        const optId = `soal${index}_opt${i}`;
+        optionsDiv.innerHTML += `<label><input type="radio" name="soal${index}" value="${i}" id="${optId}"> ${opt}</label>`;
+      });
+      soalDiv.appendChild(optionsDiv);
+      form.appendChild(soalDiv);
+    });
+
+    function periksaJawaban() {
+      let benar = 0;
+      soalList.forEach((item, index) => {
+        const selected = document.querySelector(`input[name='soal${index}']:checked`);
+        if (selected && parseInt(selected.value) === item.benar) benar++;
+      });
+      const nilai = Math.round((benar / soalList.length) * 100);
+      document.getElementById("hasil").innerText = `Kamu menjawab benar ${benar} dari ${soalList.length} soal. Nilai: ${nilai}`;
+    }
   </script>
 </body>
 </html>
